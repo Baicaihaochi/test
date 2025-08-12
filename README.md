@@ -1,4 +1,3 @@
-
 ---
 title: "InfiAlign: A Scalable and Sample-Efficient Framework for Enhancing LLM Reasoning"
 date: 2025-08-12
@@ -38,7 +37,7 @@ At its heart lies our **efficient data pipeline** – an automated curator that 
 - Matches [DeepSeek-R1-Distill-Qwen-7B](https://huggingface.co/deepseek-ai/DeepSeek-R1-Distill-Qwen-7B)'s performance using just **12%** of the data! (Your GPU just breathed a sigh of relief 😌)
 - **DPO magic** delivers an extra boost, particularly in math tasks (+3.89% on AIME benchmarks) 
 
-### 🚀 Key Contribution
+### 🚀 Main Contribution
 1. **Data-Efficient Alignment via Multi-Dimensional Filtering.** We design an automated pipeline that selects high-quality instruction data from open-source corpora using diversity, difficulty, and quality metrics, achieving strong performance with only $\sim$20\% of the data used by distilled baselines.
 2. **Modular and Scalable Framework.** InfiAlign enables seamless integration of new data sources and tasks via its modular design, allowing flexible and low-overhead adaptation across domains.
 3. **Enhanced Reasoning through Multi-Stage Training.** We adopt a multi-stage training regimen that balances data mixing, curriculum-guided SFT, and DPO to boost reasoning across various benchmarks.
