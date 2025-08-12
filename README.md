@@ -19,7 +19,7 @@ weight: 1
 
 <!-- Hero Image -->
 <div align="center">
-  <img src="images/InfiAlign_Framework.png" width="80%" alt="InfiAlign Framework">
+  <img src="images/InfiAlign_Framework.png" width="95%" alt="InfiAlign Framework">
 </div>
 
 <!-- Quick Links -->
