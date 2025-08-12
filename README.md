@@ -76,6 +76,34 @@ We've engineered a 5-step pipeline that transforms raw data into reasoning gold:
 5. **Anti-Cheat Shield** 🛡️  
    - N-gram (n=15) & embedding similarity checks (>0.9) to prevent benchmark leakage  
 
+### 🍳 SFT Training: Our Secret Sauce Recipe
+
+#### Data Curation Special
+We've cooked up two premium datasets, distilled from over **10M raw examples** across 10 top-tier sources:
+- **InfiR-SFT-92K** (95K samples) 
+- **InfiR-SFT-165K** (165K samples)
+
+#### Two-Stage Learning Bootcamp
+- **Foundation Phase** (70% easy math/code problems)
+   - Builds core reasoning skills
+   - Stable optimization regime
+- **Advanced Phase** (Full 165K dataset)
+   - Introduces complex science/open-ended tasks
+   - Maintains previous samples to prevent forgetting
+
+### 💘 DPO: Where Magic Gets Magnified
+**The Preference Alchemy** We transform: SFT's mistakes + Expert solutions = DPO gold Through our 3-step refinement:
+- **Data Detox**
+   - Benchmark decontamination
+   - SFT dataset deduplication
+- **Challenge Selection**
+   - Qwen2.5-32B tags domains
+   - Pick the longest solutions (aka hardest problems)
+- **Truth Serum**
+   - Qwen2.5 judges math/science answers
+   - Sandbox verifies code solutions
+   - Pair SFT's fails with expert solutions
+
 The result? A **lean, mean, reasoning-enhancing machine** that generalizes beautifully across domains! 🤖💫
 
 ## 🏆 Benchmark Results: Breaking Efficiency Barriers
