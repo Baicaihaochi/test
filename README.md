@@ -30,81 +30,45 @@ weight: 1
   <a href="https://huggingface.co/InfiX-ai/InfiAlign-Qwen-7B-DPO" style="padding: 8px 15px; background-color: #FFD700; color: black; border-radius: 5px; text-decoration: none;">🤗 DPO Model</a>
 </div>
 
-**InfiAlign** isn't just another alignment framework—it's your new secret weapon for supercharging LLMs! 🦸‍♂️ By ingeniously combining **supervised fine-tuning (SFT)** and **Direct Preference Optimization (DPO)** with our smart data selection pipeline, we achieve remarkable reasoning improvements while using only a fraction of typical training data. Talk about doing more with less! 😉
+**InfiAlign** isn't just another alignment framework—it's your new secret weapon for supercharging LLMs! By ingeniously combining **supervised fine-tuning (SFT)** and **Direct Preference Optimization (DPO)** with our smart data selection pipeline, we achieve remarkable reasoning improvements while using only a fraction of typical training data. Talk about doing more with less! 😉
 
 ## 🌟 Why InfiAlign Stands Out
 
 At its heart lies our **efficient data pipeline** – an automated curator that handpicks the crème de la crème from open-source reasoning datasets using multidimensional quality metrics. When tested on [Qwen2.5-Math-7B-Base](https://huggingface.co/Qwen/Qwen2.5-Math-7B), the results were mind-blowing:
 - Matches [DeepSeek-R1-Distill-Qwen-7B](https://huggingface.co/deepseek-ai/DeepSeek-R1-Distill-Qwen-7B)'s performance using just **12%** of the data! (Your GPU just breathed a sigh of relief 😌)
-- **DPO magic** delivers an extra boost, particularly in math tasks (+3.89% on AIME benchmarks) 🧮➗
+- **DPO magic** delivers an extra boost, particularly in math tasks (+3.89% on AIME benchmarks) 
 
 ### 🚀 Triple-Threat Advantages
-1. **Data diet plan** - Trains effectively on 12% typical data 🥗
-2. **Quality radar** - Multidimensional metrics for auto-curation 🎯
-3. **Power combo** - SFT+DPO two-stage enhancement 🥊
+1. **Data diet plan** - Trains effectively on 12% typical data 
+2. **Quality radar** - Multidimensional metrics for auto-curation 
+3. **Power combo** - SFT+DPO two-stage enhancement 
 
 ## 🎉 Hot Off the Press!
 - ⏳ ***Teaser Alert*** Our InfiAlign-SFT is getting an RL-powered upgrade - watch this space! 
 - 🔥 ***`2025/08/11`*** Our models are partying on HuggingFace! Meet [InfiAlign-Qwen-7B-SFT](link) and [InfiAlign-Qwen-7B-DPO](link) 🎊
-- 🔥 ***`2025/08/07`*** Paper alert! "[InfiAlign: A Scalable and Sample-Efficient Framework for Aligning LLMs to Enhance Reasoning Capabilities](https://arxiv.org/abs/2508.05496)" is now on arXiv 📄🚀
+- 🔥 ***`2025/08/07`*** Paper alert! "[InfiAlign: A Scalable and Sample-Efficient Framework for Aligning LLMs to Enhance Reasoning Capabilities](https://arxiv.org/abs/2508.05496)" is now on arXiv 
 
-## 🧠 Behind the Magic: Our Methodology
+## 🧠 Methodology Overview
 
-### The Data Selection Symphony 🎻
+### Data Selection Pipeline
+Traditional alignment methods often require massive amounts of training data, which is computationally expensive and can lead to diminishing returns. Our data-efficient approach addresses this by: (1) eliminating redundant or low-quality samples through multi-dimensional filtering (diversity, difficulty, quality), and (2) optimizing the training curriculum to focus on the most impactful examples. This enables comparable performance to distilled baselines using only 20% of the data, while maintaining strong generalization across reasoning tasks.
 
-We've engineered a 5-step pipeline that transforms raw data into reasoning gold:
+Our data curation process transforms raw datasets into high-quality reasoning corpora:
+1. **Data Preparation**: Aggregates QA pairs from multiple sources, standardizes formats, and generates missing Chain-of-Thought traces using teacher models
+2. **Diversity Sampling**: Balances domain representation (Algebra, Geometry, etc.) and ensures semantic variety through clustering
+3. **Difficulty Sampling**: Prioritizes complex problems using response length as a proxy for difficulty
+4. **Quality Control**: Validates answer correctness through automated verifiers and LLM scoring
+5. **Benchmark Protection**: Implements rigorous decontamination to prevent data leakage
 
-1. **Data Prep Bootcamp**  
-   - Gather QA pairs from top reasoning datasets (+ optional proprietary sources)  
-   - Standardize formats & generate missing Chain-of-Thought traces using teacher models (like having Einstein as your TA! 🧑‍🏫)  
-   - Filter out noise (non-English, half-baked answers) with rule-based precision 🧹
+### Training Framework
+**Supervised Fine-Tuning**:
+- Utilizes two curated datasets (95K and 165K samples) distilled from 10M+ examples
+- Employs two-phase training: foundational skills development followed by advanced reasoning tasks
 
-2. **Diversity Sampling**
-   - **By domain**: LLM-classified categories (Algebra, Geometry, etc.) → balanced sampling  
-   - **By semantics**: Sentence embeddings → K-means clustering → uniform sampling  
-   - Merge & deduplicate while keeping valuable templates (n-gram overlap check at n=20)  
-
-3. **Difficulty Sampling**
-   - Secret sauce: Using **response length** as difficulty proxy (longer = more complex) 📏  
-   - Prioritize marathon-length responses within each cluster  
-
-4. **Quality Control SWAT Team** 🚨  
-   - Format checks & answer validation (math must have \\boxed answers)  
-   - Automated verifiers (MathVerify, Sandbox) + LLM correction templates (8 retries max!)  
-   - Open-ended tasks get LLM quality scores → low-confidence answers walk the plank  
-
-5. **Anti-Cheat Shield** 🛡️  
-   - N-gram (n=15) & embedding similarity checks (>0.9) to prevent benchmark leakage  
-
-### 🍳 SFT Training: Our Secret Sauce Recipe
-
-#### Data Curation Special
-We've cooked up two premium datasets, distilled from over **10M raw examples** across 10 top-tier sources:
-- **InfiR-SFT-92K** (95K samples) 
-- **InfiR-SFT-165K** (165K samples)
-
-#### Two-Stage Learning Bootcamp
-- **Foundation Phase** (70% easy math/code problems)
-   - Builds core reasoning skills
-   - Stable optimization regime
-- **Advanced Phase** (Full 165K dataset)
-   - Introduces complex science/open-ended tasks
-   - Maintains previous samples to prevent forgetting
-
-### 💘 DPO: Where Magic Gets Magnified
-**The Preference Alchemy** We transform: SFT's mistakes + Expert solutions = DPO gold Through our 3-step refinement:
-- **Data Detox**
-   - Benchmark decontamination
-   - SFT dataset deduplication
-- **Challenge Selection**
-   - Qwen2.5-32B tags domains
-   - Pick the longest solutions (aka hardest problems)
-- **Truth Serum**
-   - Qwen2.5 judges math/science answers
-   - Sandbox verifies code solutions
-   - Pair SFT's fails with expert solutions
-
-The result? A **lean, mean, reasoning-enhancing machine** that generalizes beautifully across domains! 🤖💫
+**Direct Preference Optimization**:
+- Constructs preference pairs by comparing SFT model errors with expert solutions
+- Implements three refinement steps: data cleaning, challenge selection, and quality verification
+- Optimizes using the DPO objective function to enhance reasoning capabilities
 
 ## 🏆 Benchmark Results: Breaking Efficiency Barriers
 
@@ -123,16 +87,6 @@ InfiAlign redefines the performance-efficiency tradeoff, achieving SOTA results 
 | **InfiAlign-SFT (ours)** | Qwen2.5-7B-Math-Base | 165K | 42.19 | **63.75** | 92.70 | **53.60** | 56.68 | 36.20 | **57.52** |
 | **InfiAlign-DPO (ours)** | InfiAlign-SFT | 10K | **47.45** | 61.25 | **93.45** | 51.77 | 53.95 | 35.30 | 57.20 |
 
-
-## 🎯 Try It Yourself
-
-```python
-from transformers import AutoModelForCausalLM
-
-# Load our optimized models
-sft_model = AutoModelForCausalLM.from_pretrained("InfiX-ai/InfiAlign-Qwen-7B-SFT")
-dpo_model = AutoModelForCausalLM.from_pretrained("InfiX-ai/InfiAlign-Qwen-7B-DPO")
-```
 
 ## 📚 Citation Information
 
