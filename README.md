@@ -59,17 +59,17 @@ We've engineered a 5-step pipeline that transforms raw data into reasoning gold:
    - Standardize formats & generate missing Chain-of-Thought traces using teacher models (like having Einstein as your TA! 🧑‍🏫)  
    - Filter out noise (non-English, half-baked answers) with rule-based precision 🧹
 
-2. **Diversity Sampling** 💃  
+2. **Diversity Sampling**
    - **By domain**: LLM-classified categories (Algebra, Geometry, etc.) → balanced sampling  
    - **By semantics**: Sentence embeddings → K-means clustering → uniform sampling  
    - Merge & deduplicate while keeping valuable templates (n-gram overlap check at n=20)  
 
-3. **Difficulty Sampling** 🕺  
+3. **Difficulty Sampling**
    - Secret sauce: Using **response length** as difficulty proxy (longer = more complex) 📏  
    - Prioritize marathon-length responses within each cluster  
 
 4. **Quality Control SWAT Team** 🚨  
-   - Format checks & answer validation (math must have boxed answers 📦)  
+   - Format checks & answer validation (math must have \\boxed answers)  
    - Automated verifiers (MathVerify, Sandbox) + LLM correction templates (8 retries max!)  
    - Open-ended tasks get LLM quality scores → low-confidence answers walk the plank  
 
